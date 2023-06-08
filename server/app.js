@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyparse = require('body-parser');
 require("dotenv").config();
 const bodyParser = require('body-parser');
+const authRoutes = require('./routes/auth');
 
 //middleware
 app.use(express.json({ limit: "50mb" }));
@@ -21,7 +22,7 @@ app.use(
 );
 app.use(cors());
 
-
+app.use("/api/users",authRoutes);
 
 
 module.exports = app;
