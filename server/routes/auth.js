@@ -1,3 +1,5 @@
+//it is regarding authentication
+
 const router = require("express").Router();
 const User= require('../models/userSchema');
 const dotenv = require('dotenv');
