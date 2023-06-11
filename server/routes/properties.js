@@ -122,7 +122,7 @@ router.get("/", async (req, res) => {
       property: allProperty,
     });
   }
-  catch {
+  catch(e){
     res.status(500).json({
       status: "Failed",
       message: e.message,

@@ -1,3 +1,4 @@
+// it is start point of server or backend
 //it is regarding authentication
 
 const router = require("express").Router();
@@ -87,7 +88,7 @@ router.post("/signin", async (req, res) => {
         //console.log(userExists.password);
         // . If no user is found, it sends a 400 response with an error message.
         if (userExists == null || !userExists) {
-            res.status(400).json({
+            res.status(400).json({     
                 status: "failed",
                 message: "User not found!Please give correct email"
             })
