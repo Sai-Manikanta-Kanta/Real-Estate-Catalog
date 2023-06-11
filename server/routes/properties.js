@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
         } else {
           console.log("success");
           
-
+          const imageUrl = result.secure_url;
      
           // It retrieves the last property from the database using Property.find().sort({ _id: -1 }).limit(1).
           const lastProp = await Property.find().sort({ _id: -1 }).limit(1);
