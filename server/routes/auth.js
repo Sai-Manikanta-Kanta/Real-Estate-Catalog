@@ -76,7 +76,7 @@ router.post("/signin", async (req, res) => {
         //console.log(userExists);
         //console.log(userExists.password);
         if (userExists == null || !userExists) {
-            res.status(400).json({
+            res.status(400).json({     
                 status: "failed",
                 message: "User not found!Please give correct email"
             })
