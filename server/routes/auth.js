@@ -1,3 +1,4 @@
+// it is start point of server or backend
 //it is regarding authentication
 
 const router = require("express").Router();
