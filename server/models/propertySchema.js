@@ -1,4 +1,6 @@
+// The mongoose library is imported
 const mongoose = require('mongoose');
+// The PropertySchema is defined using mongoose.Schema(). It describes the structure and properties of a property document in the MongoDB collection.
 const PropertySchema = mongoose.Schema({
     ppdId: {
         type: String,
@@ -78,5 +80,7 @@ const PropertySchema = mongoose.Schema({
 
 
 })
+// The Property model is created using mongoose.model() by passing the name "property" and the PropertySchema. This creates a MongoDB collection named "properties" (pluralized version of the model name) with the specified schema.
 const Property = mongoose.model("property", PropertySchema);
+// the Property model is exported using module.exports to make it accessible in other parts of the application.
 module.exports = Property;
