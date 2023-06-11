@@ -1,12 +1,19 @@
+// The code defines an Express router by calling require("express").Router().
 const router = require("express").Router();
+// It imports the Property model from the propertySchema module and the cloudinary middleware.
 const Property = require('../models/propertySchema');
 const cloudinary = require('../middleware/cloudinary')
 
-//add new Property
+
+// This route is used to add a new property.
 router.post('/', async (req, res) => {
-  // console.log(req.body)
+  
   try {
+//     It expects the request body to contain an imageUrl field.
+// It uses the cloudinary middleware to upload the image to Cloudinary and retrieve the secure URL.
+    
     const uploadImg = await cloudinary.v2.uploader.upload(
+      
       req.body.imageUrl,
       { upload_preset: "Manikanta" },
       async function (error, result) {
@@ -15,26 +22,29 @@ router.post('/', async (req, res) => {
           res.sendStatus(500);
         } else {
           console.log("success");
+          
 
-          const imageUrl = result.secure_url;
-          // console.log(imageUrl)
+     
+          // It retrieves the last property from the database using Property.find().sort({ _id: -1 }).limit(1).
           const lastProp = await Property.find().sort({ _id: -1 }).limit(1);
           //console.log(value);
+          // It generates a new ppdId based on the last property's ppdId.
           let ppd_id = "PPD";
-          //console.log(value.length);
+         
           if (lastProp.length != 0) {
             ppd_id = parseInt(lastProp[0].ppdId.split("D")[1]) + 1;
-            // console.log(ppd_id)
+         
           } else {
             ppd_id = 1100;
-            // console.log(ppd_id)
+            
           }
+          // It generates random values for views and dayLeft.
           const views = parseInt(Math.random() * 100);
           const dayLeft = parseInt(Math.random() * 30);
 
           const { length, breadth, mobile } = req.body;
           const area = parseInt(req.body.length) * parseInt(req.body.breadth);
-          // console.log(uploadImg.url)
+          // It creates a new property record using the Property.create() method with the extracted data from the request body and other generated values.
           const property = await Property.create({
             ppdId: "PPD" + ppd_id,
             imageUrl: imageUrl,
@@ -79,6 +89,7 @@ router.post('/', async (req, res) => {
             userid: req.user.email,
 
           });
+          // It sends a JSON response with the status and the newly created property.
 
           res.status(200).json({
             status: "Success",
@@ -102,7 +113,10 @@ router.post('/', async (req, res) => {
 // Get all properties for a particular user
 router.get("/", async (req, res) => {
   try {
+    // It expects the user's email to be available in req.user.email.
+    // It retrieves properties from the database using Property.find({ userid: req.user.email }).sort({ _id: -1 }).limit(10).
     const allProperty = await Property.find({ userid: req.user.email }).sort({ _id: -1 }).limit(10);
+    // It sends a JSON response with the status and the retrieved properties.
     res.status(200).json({
       status: "Success",
       property: allProperty,
@@ -119,6 +133,8 @@ router.get("/", async (req, res) => {
 // Update an existing property
 router.put("/update/:id", async (req, res) => {
   try {
+    // It expects the property ID to be available as req.params.id.
+    // It updates the property record identified by the ID with the data provided in the request body using Property.findByIdAndUpdate().
     const updatedProperty = await Property.findByIdAndUpdate(
       { _id: req.params.id },
       {
@@ -164,21 +180,25 @@ router.put("/update/:id", async (req, res) => {
         new: true,
       }
     );
+    // It sends a response with the updated property.
     res.send(updatedProperty);
   } catch (error) {
     res.send(error);
   }
 });
 
-//update Unsold to sold
+// This route is used to update the status of a property to "Sold".
 router.patch("/sold/:id", async (req, res) => {
   try {
+    // It expects the property ID to be available as req.params.id.
     console.log(req.params.id);
+    // It updates the property record identified by the ID with the status "Sold" and sets daysLeft to 0 using Property.findByIdAndUpdate()
     const updateId = await Property.findByIdAndUpdate(
       { _id: req.params.id },
       { status: "Sold", daysLeft: 0 },
       { new: true }
     );
+    // It sends a JSON response with the status and details of the updated property.
     res.status(200).json({
       status: "Updated",
       details: updateId,
@@ -191,13 +211,17 @@ router.patch("/sold/:id", async (req, res) => {
   }
 });
 
-//Delete Property by _id
+// This route is used to delete a property by ID.
 router.delete('/:id', async (req, res) => {
   try {
+    // It expects the property ID to be available as req.params.id.
+    // It deletes the property record identified by the ID using Property.findByIdAndDelete().
     const deletedProperty = await Property.findByIdAndDelete(req.params.id);
     if (!deletedProperty) {
       return res.status(404).json({ message: 'Property not found' });
     }
+    // It sends a JSON response indicating the success of the deletion or an error message.
+
     res.status(200).json({
       message: 'Property deleted successfully',
       data: deletedProperty,
@@ -215,4 +239,3 @@ router.delete('/:id', async (req, res) => {
 
 module.exports = router;
 
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthbnRhLnNhaW1hbmlrYW50YUBnbWFpbC5jb20iLCJpYXQiOjE2ODYyODk1NzYsImV4cCI6MTY4NjM3NTk3Nn0.FOMS6eDjZqCNjkXFobxUh2kgBMrlYhdi2GeVs1fqFJM
