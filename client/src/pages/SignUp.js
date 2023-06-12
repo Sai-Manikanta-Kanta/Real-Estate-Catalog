@@ -25,7 +25,7 @@ function SignUp() {
 
     axios
       .post(
-        "http://localhost:5000/api/users/signup",
+        "https://tenxmanikanta-syed-bindhu.onrender.com/api/users/signup",
         {
           email: email,
           password: password,
@@ -50,7 +50,7 @@ function SignUp() {
             alt="logo"
             className="logo"
             style={{ maxHeight: "80px", maxWidth: "80px" }}
-            src="https://www.shutterstock.com/image-vector/mbv-letter-creative-modern-elegant-260nw-2105467679.jpg"
+            src="https://tse4.mm.bing.net/th?id=OIP.dHd62xgmWq55oIPv43HuzwHaHa&pid=Api&P=0&h=180"
           />
           <h6>Create New Account</h6>
           <div className="input-group mb-3">

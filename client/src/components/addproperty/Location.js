@@ -28,7 +28,7 @@ function Location({
     let token = localStorage.getItem("token");
     let id = localStorage.getItem("userID");
 
-    let url = "http://localhost:5000/api/property";
+    let url = "https://tenxmanikanta-syed-bindhu.onrender.com/api/property/";
 
     // console.log(formData);
     if (status === "add") {

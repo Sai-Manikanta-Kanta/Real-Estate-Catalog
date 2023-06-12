@@ -37,7 +37,7 @@ const SideBar = () => {
                             margin: "20px",
                             marginBottom:"50px"
                         }}
-                        src="https://www.shutterstock.com/image-vector/mbv-letter-creative-modern-elegant-260nw-2105467679.jpg"
+                        src="https://tse4.mm.bing.net/th?id=OIP.dHd62xgmWq55oIPv43HuzwHaHa&pid=Api&P=0&h=180"
                     />
                     <div>
                         <ul

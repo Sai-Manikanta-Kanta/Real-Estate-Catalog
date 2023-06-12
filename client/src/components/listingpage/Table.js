@@ -21,7 +21,7 @@ const Table = () => {
         // console.log(path);
     }
 
-    let url = "http://localhost:5000/api/property";
+    let url = "https://tenxmanikanta-syed-bindhu.onrender.com/api/property/";
     useEffect(() => {
         fetch(url, {
             method: "GET",
@@ -54,7 +54,7 @@ const Table = () => {
 
         axios
             .patch(
-                `http://localhost:5000/api/property/sold/${details._id}`,
+                `https://tenxmanikanta-syed-bindhu.onrender.com/api/property/sold/${details._id}`,
                 data,
                 {
                     headers: {

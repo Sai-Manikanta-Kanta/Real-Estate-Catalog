@@ -104,7 +104,7 @@ const HomePage = () => {
     let userid = localStorage.getItem("email");
     // console.log(token, id);
     setSearchFlag(true);
-    let url = `https://real-estate-catalog-ubap.onrender.com/api/search/${searchId}`;
+    let url = `https://tenxmanikanta-syed-bindhu.onrender.com/api/search/${searchId}`;
     axios
       .get(url)
       .then((res) => {
