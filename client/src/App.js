@@ -26,5 +26,6 @@ const App = () => {
     </div>
   )
 }
-
+// client deployed link
+// https://6487f4e132e59c58c273f8b7--charming-buttercream-08e17f.netlify.app/
 export default App

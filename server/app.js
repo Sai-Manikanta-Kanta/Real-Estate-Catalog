@@ -29,3 +29,6 @@ app.use("/api/property",validateToken,propertyRoutes);
 app.use('/api/search',searchRoutes);
 
 module.exports = app;
+
+// server application deployed link
+// https://tenxmanikanta-syed-bindhu.onrender.com/
